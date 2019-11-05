@@ -62,3 +62,6 @@ switch (device) {
 switch/case 문에서는 각 case 에서 실행할 코드를 작성하고 맨 마지막에 ```break;``` 를 해야함.
 break 를 하지 않으면 그 다음 ```case``` 의 코드까지 실행해버림.
 맨 아래의 ```default:``` 는 device 값이 case에 속하지 않은 값일 경우를 의미.
+
+(switch/case 문에는 case에 연산자가 들어갈 수 없음. )
+
