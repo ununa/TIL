@@ -90,3 +90,35 @@ function getName(animal) {
 const name = getName(namelessDog);
 console.log(name); // 이름이 없는 동물입니다.
 ```
+
+
+### 04. 함수의 기본 파라미터
+원의 넓이는 구하는 함수
+
+``` js
+function circle(r) {
+  return Math.PI * r * r; // Math.PI는 원주율 파이(π) 값을 가리킴.
+}
+const area = circle(4);
+console.log(area);
+```
+```r``` 값이 없다면 ```NaN```이 나오게 되는데, 기본 값을 1로 사용되도록 설정해보기.
+``` js
+// ES5
+function circle(r) {
+  const radius = r || 1;
+  return Math.PI * r * r;
+}
+
+// ES6
+function circle(r = 1) {
+  return Math.PI * r * r;
+}
+
+// ES6 & 화살표 함수
+const circle = (r = 1) => Math.PI * r * r;
+
+
+const area = circle();
+console.log(area);
+```
