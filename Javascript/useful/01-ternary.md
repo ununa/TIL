@@ -122,3 +122,68 @@ const circle = (r = 1) => Math.PI * r * r;
 const area = circle();
 console.log(area);
 ```
+
+### 05. 조건문 더 스마트하게 쓰기
+#### 특정 값이 여러 값중 하나인지 확인해야 할 때
+```js
+function isAnimal(text) {
+  return(
+    text === '고양이' || text === '개' || text === '거북이'
+  );
+}
+
+// 방법1. 배열을 만들고 배열의 includes 함수 사용하기.
+function isAnimal(name) {
+  const animals = ['고양이', '개', '거북이'];
+  return animals.includes(name);
+}
+
+// 방법2. 배열 + 화살표 함수
+const isAnimal = name => ['고양이', '개', '거북이'].includes(name);
+
+console.log(isAnimal('개')); // true
+console.log(isAnimal('노트북')); // false
+```
+
+#### 값에 따라 다른 결과물을 반환 해야 할 때
+ex) 동물 이름을 받아오면, 동물의 소리를 반환.
+``` js
+function getSound(animal) {
+  if (animal === '개') return '멍멍';
+  if (animal === '고양이') return '메에옹';
+  return '...';
+  
+  // 방법1. switch case문
+  switch(animal) {
+    case '개':
+      return '멍멍';
+    case '고양이':
+      return '메에옹';
+    default:
+      return '...';
+  }
+  
+  // 방법2. 객체
+  const sounds = {
+    개: '멍멍',
+    고양이: '메에옹'
+  };
+  return sounds[animal] || '...';
+  
+  // 방법3. 객체 + 값에 따라 실행하는 코드 구문이 다를 때.
+  const tasks = {
+    개() {
+      console.log('멍멍');
+    },
+    고양이() {
+      console.log('메에옹');
+    }
+  };
+  if(!tasks[animal]){
+    console.log('...')
+  }
+  tasks[animal]();
+}
+
+console.log(getSound('개')) // 멍멍
+```
