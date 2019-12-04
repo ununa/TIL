@@ -1,6 +1,6 @@
 # jQuery 보다 먼저 알았으면 좋았을 것들.
 
-## 돔(DOM) 선택
+### 돔(DOM) 선택
 #### HTML
 ``` html
 <div id="app" class="container" data-product-id="G123">Guitar</div>
@@ -35,6 +35,6 @@ document.querySelectorAll('.container') // 전부 반환 => 1
 document.querySelector('div').dataset.productId // 'G123'
 document.querySelector('div').dataset.productId = 'G456' // 속성 값 변경.
 
-// getAttribute(), setAttribute()
+// ~ IE11. getAttribute(), setAttribute()
 document.querySelector('div').getAttribute('data-product-id') // 'G123'
 ```
