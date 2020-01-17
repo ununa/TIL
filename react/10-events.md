@@ -102,7 +102,7 @@ class CounterParent extends React.Component {
             count: 0
         };
         
-        this.increase = this.increase.bind(this); << 추가
+        this.increase = this.increase.bind(this); // 추가
     }
     
     // 함수추가
@@ -135,7 +135,7 @@ class CounterParent extends React.Component {
         return(
             <div style={backgroundStyle}>
                 <Counter display={this.state.count} />
-                <button onClick={this.increase} style={buttonStyle}>+</button> << 속성추가
+                <button onClick={this.increase} style={buttonStyle}>+</button> // 속성추가
             </div>
         );
     }
