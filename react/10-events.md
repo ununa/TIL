@@ -71,7 +71,7 @@ ReactDOM.render(
 );
 ```
 
-## 버튼 작동시키지
+## 버튼 작동시키
 플러스 버튼을 클릭할 때마다 카운터의 값이 1씩 증가되게 해야한다.
 1. 버튼의 클릭 이벤트를 리스닝한다.
 2. 클릭에 반응해 카운터가 의존하는 ```this.state.count``` 속성의 값을 증가시킬 이벤트 핸드러를 구현한다.
@@ -79,6 +79,9 @@ ReactDOM.render(
 >- 리액트에서는 모든 사항을 JSX 자체에 인라인으로 지정하는 방식으로 이벤트를 리스닝한다.
 >- 리스닝할 이벤트와 호출될 이벤트 핸들러 모두를 마크업 안에 지정해야 한다.
 >- 그렇게 하기 위해 ```CounterParent``` 컴포넌트 안의 ```return``` 함수를 찾아서 수정하자.
+
+3. ```increase``` 함수는 이벤트를 인자로 받고, 이벤트 인자는 e로 접근할 수 있게 지정하였다.
+4. 생성자에서는 this를 increase함수에 바인딩 함.
 
 ``` js
         return(
@@ -102,8 +105,11 @@ class CounterParent extends React.Component {
         this.increase = this.increase.bind(this); << 추가
     }
     
+    // 함수추가
     increase(e) {
-    
+        this.setState({
+            count: this.state.count + 1
+        });
     }
 
     render(){
@@ -135,3 +141,9 @@ class CounterParent extends React.Component {
     }
 }
 ```
+
+## 이벤트 속성
+### 합성 이벤트
+리액트는 JSX에 이벤트를 지정하는 경우, DOM이벤트를 직접 다루지 않는다. ```SyntheticEvent```는 리액트의 특별한 이벤트 유형인데, ```MouseEvent```나 ```KeyboardEvent``` 등과 같은 네이티브 이벤트 타입을 받지 않고 이벤트를 래핑하는 ```SyntheticEvent``` 타입을 인자로 받는다.
+
+
