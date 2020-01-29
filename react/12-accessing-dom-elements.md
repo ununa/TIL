@@ -160,6 +160,91 @@ render(){
 ```
 
 
+## 포털 사용하기
+- 포털이란? JSX를 페이지의 어느 곳으로든 DOM 엘리먼트로 렌더링시킬 수 있다.
+- 사용방법은 ReactDOM.render 메소드와 매우 유사한데, 렌더링할 JSX를 지정하고, 렌더링해 보낼 대상 DOM 엘리먼트를 지정하면 된다.
+``` html
+<h1 id="colorHeading">Colorizer</h1>
+```
+``` css
+#colorHeading {
+    padding: 0;
+    margin: 50px;
+    margin-bottom: -20px;
+    font-family: sans-serif;
+}
+```
+``` js
+// 추가
+var heading = document.querySelector('#colorHeading');
+
+class ColorLabel extends React.Component {
+  render(){
+    return ReactDOM.createPortal(
+      ": " + this.props.color,
+      heading
+    )
+  }
+}
+
+class Colorizer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      color: '',
+      bgColor: 'white'
+    };
+
+    this.colorValue = this.colorValue.bind(this);
+    this.setNewColor = this.setNewColor.bind(this);
+  }
+
+  colorValue(e) {
+    this.setState({
+      color: e.target.value
+    });
+  }
+
+  setNewColor(e) {
+    this.setState({
+      bgColor: this.state.color
+    });
+
+    e.preventDefault();
+  }
+
+  render(){
+    var squareStyle = {
+      backgroundColor: this.state.bgColor
+    };
+
+    return(
+      <div className="colorArea">
+        <div style={squareStyle} className="colorSquare"></div>
+        <form onSubmit={this.setNewColor}>
+          <input onChange={this.colorValue}
+                 ref={
+                   function(el) {
+                     self._input = el;
+                   }
+                 }
+                 placeholder="Enter a color value" ></input>
+          <button type="submit">go</button>
+        </form>
+        <ColorLabel color={this.state.bgColor}/> // 추가
+      </div>
+    );
+  }
+}
+```
+- ColorLabel 이라는 컴포넌트를 인스턴스화했으며, state.bgColor 속성을 color 속성 값으로 설정했다.
+- ReactDOM.createPortal()은 두 개의 인자를 받는다.
+- 첫째는 출력될 내용의 JSX
+- 둘째는 그 JSX 출력시킬 대상 DOM 엘리먼트 이다.
+- ★ h1 엘리먼트가 container div를 출력하는 앱 범위 밖에 있다는 점.
+- ★ 포털을 사용함으로써 부모와 자식으로 이뤄진 기존 계층 구조에 갇히지 않고 페이지의 어느 엘리먼트든 직접 접근이 가능하다.
+
 
 
 
