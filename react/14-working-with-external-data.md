@@ -239,3 +239,9 @@ class IPAddressContainer extends Component {
 export default IPAddressContainer;
 ```
 
+## Tip. 프레젠테이션 대 컨테이너
+1. 모양을 다루는 컴포넌트:  
+이는 프레젠테이션 컴포넌트(Presentational Component)로 더 잘 알려져 있다.
+2. 보이지 않지만 뭔가를 처리하는 컴포넌트:  
+예를 들어 라우팅을 하거나 카운터를 증가시키거나 HTTP 요청을 통해 데이터를 가져오는 등의 여러 작업을 한다. (Container Component)
+컴포넌트를 잘 다루는 방법에 대한 비법(https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)
