@@ -390,10 +390,33 @@ class TodoItems extends Component {
         this.deleteItem = this.deleteItem.bind(this);
     }
 ```
+
+## 애니메이션
+- 플립 무브(Flip Movoe): 경량의 애니메이션 라이브러리
+- 터미널을 열어 현재 위치가 todolist 프로젝트 폴더임을 확인한 뒤 
+- ```npm i -S react-flip-move``` 명령 실행
+- 이렇게 하면 프로젝트의 node_modules 폴더 안에 복사될 것이다.
+
+#### TodoItems.js 
+``` js
+import FlipMove from 'react-flip-move'; // 추가
+.
+.
+.
+        return(
+            <ul className="theList">
+                <FlipMove duration={250} easing="ease-out"> // 추가
+                    {listItems}
+                </FlipMove>
+            </ul>
+        )
+    };
+}
+```
 ### .
 ### .
 ### .
-### 잠깐! 정리 코드
+### 최종 코드
 #### TodoList.js
 ``` js
 import React, { Component } from "react";
@@ -467,6 +490,8 @@ export default TodoList;
 #### TodoItems.js
 ``` js
 import React, { Component } from 'react';
+import FlipMove from 'react-flip-move';
+
 
 class TodoItems extends Component {
     constructor(props) {
@@ -490,7 +515,9 @@ class TodoItems extends Component {
 
         return(
             <ul className="theList">
-                {listItems}
+                <FlipMove duration={250} easing="ease-out">
+                    {listItems}
+                </FlipMove>
             </ul>
         )
     };
@@ -498,4 +525,3 @@ class TodoItems extends Component {
 
 export default TodoItems;
 ```
-
