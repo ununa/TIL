@@ -211,6 +211,11 @@ ReactDOM.render(
 );
 ```
 
+
+#### 왜 constructor를 명시해야하는가?
+```state```의 값을 초기화 시키기 위함과 초기의 값으로 값들을 세팅하기 위해서.
+- 어떠한 ```component```가 실행될 때 ```render()``` 함수보다 먼저 실행이 되면서 그 컴포넌트를 초기화 시켜주고 싶은 ```코드들```을 ```constructor``` 안에다가 코드를 작성
+
 #### 왜 super(props)를 명시해줘야하는가?
 - ```constructor``` 사이클이 끝나기 전 ```this.props```가 생성되는 것을 보장함.
 - 자바스크립트에서는 ```super```는 부모 클래스 생성자를 가리킨다. (리액트에서는 ```React.Component```)
@@ -239,5 +244,15 @@ class LightningCounter extends React.Component {
     }
 }
 ```
+
+
+### .
+### .
+### .
+### (2020.02.04 내용추가)
+- ```state``` : props의 값에 따라서 내부 구현에 필요한 데이터들
+- ```props``` : 사용자가 컴포넌트를 사용하는 입장에서 중요한 것.
+즉, Component에서 Props(외부)를 통해 사용자가 조작하면 State(내부)에서 데이터 가공(?)
+
 
 
