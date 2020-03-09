@@ -231,3 +231,181 @@ ReactDOM.render(
 - 일반화 시키면, 작은 HTML덩어리를 리턴하는 게 컴포넌트가 하는 일의 전부이다.
 - 각 컴포넌트의 ```render``` 함수는 또 다른 컴포넌트의 ```render``` 함수에게 리턴한다.
 - 모든 HTML 덩어리들은 최종적으로 DOM에 밀어 넣어 거대한 덩어리가 될 때까지 쌓이는데 이게 컴포넌트의 재사용성과 결합성이 가능하게 된 이유이다.
+
+
+
+
+## 2020-03-09 내용 추가
+### 간단한 컴포넌트
+React 컴포넌트는 ```render()``` 라는 메서드를 구현하는데, 이것은 데이터를 입력받아 화면에 표시 할 내용을 반환하는 역할을 한다. 컴포넌트로 전달된 데이터는 ```render()``` 안에서 ```this.props```를 통해 접근할 수 있다.
+
+``` js
+class HelloMessage extends React.Component {
+    render() {
+        return(
+            <div>
+                Hello {this.props.name}
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(
+    <HelloMessage name="ununa" />,
+    document.getElementById('hello-example')
+);
+```
+
+### 상태를 가지는 컴포넌트
+컴포넌트는 ```this.props```를 이용해 입력 데이터를 다루는 것 외에도 ```this.state```로 접근하여 내부적인 상태 데이터를 가질 수 있다. 컴포넌트의 상태 데이터가 바뀌면 ```render()```가 다시 호출되어 마크업이 갱신된다.
+
+``` js
+class Timer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { seconds: 0 };
+    }
+
+    tick() {
+        this.setState(state => ({
+            seconds: state.seconds + 1
+        }));
+    }
+
+    componentDidMount() {
+        this.interval = setInterval(() => this.tick(), 1000);
+    }
+}
+
+ReactDOM.render(
+    <Timer />,
+    document.getElementById('timer-example')
+);
+```
+
+### 애플리케이션
+```props```와 ```state```를 사용해서 간단한 Todo 애플리케이션을 만들 수 있다. ```state```를 사용해 입력자가 입력한 텍스트와 할 일 목록을 관리하는데, 이벤트 핸들러들이 인라인으로 각각 존재하는 것처럼 보이지만, 실제로는 이벤트 위임을 통해 하나로 구현된다.
+
+``` js
+class TodoApp extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = { items: [], text: '' };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    render() {
+        return(
+            <div>
+                <h3>TODO</h3>
+                <TodoList items={this.state.items} />
+                <form onSubmit={this.handleSubmit}>
+                    <label htmlFor="new-todo">
+                        What needs to be done?
+                    </label>
+                    <input
+                        id="new-todo"
+                        onChange={this.handleChange}
+                        value={this.state.text}
+                    />
+                    <button>
+                        Add #{this.state.items.length + 1}
+                    </button>
+                </form>
+            </div>
+        );
+    }
+
+    handleChange(e) {
+        this.setState({ text: e.target.value });
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        if (!this.state.text.length) {
+            return;
+        }
+        const newItem = {
+            text: this.state.text,
+            id: Date.now()
+        };
+        this.setState(state => ({
+            items: state.items.concat(newItem),
+            text: ''
+
+        }));
+    }
+}
+
+
+class TodoList extends React.Component {
+    render() {
+        return (
+            <ul>
+                {this.props.items.map(item => (
+                    <li key={item.id}>{item.text}</li>
+                ))}
+            </ul>
+        );
+    }
+}
+
+ReactDOM.render(
+    <TodoApp />,
+    document.getElementById('todos-example')
+);
+```
+
+
+### 외부 플러그인을 사용하는 컴포넌트
+React는 유연하며 다른 라이브러리나 프레임워크를 함께 활용할 수 있다. 마크다운 라이브러리인 ```remarkable```을 사용해 ```<textarea>```의 값을 실시간으로 변환해보자.
+
+``` js
+class MarkdownEditor extends React.Component {
+    constuctor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.state = { value: "Hello, **world**!" };
+    }
+
+    handleChange(e) {
+        this.setState({ value: e.target.value });
+    }
+
+    getRawMarkup() {
+        const md = new Remarkable();
+        return { __html: md.render(this.state.value) };
+    }
+
+    render() {
+        return(
+            <div className="MarkdownEditor">
+                <h3>Input</h3>
+                <label htmlFor="markdown-content">
+                    Enter some markdown
+                </label>
+                <textarea
+                    id="markdown-content"    
+                    onChange={this.handleChange}
+                    defaultValue={this.state.value}
+                />
+                <h3>Output</h3>
+                <div
+                    className="content"
+                    dangerouslySetInnerHTML={this.getRawMarkup()}
+                >
+                </div>
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(
+    <MarkdownEditor />,
+    document.getElementById('markdown-example')
+);
+```
+
+
+#### 예제: https://ko.reactjs.org/
