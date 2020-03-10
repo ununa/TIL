@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Events</title>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<style>
+#container {
+    padding: 50px;
+    background-color:#fff;
+}
+</style>
+</head>
+<body>
+
+<div id="container"></div>
+
+<script type="text/babel">
+class Counter extends React.Component {
+    render(){
+        var textStyle = {
+            fontSize: 72,
+            fontWeight: 'bold',
+            fontFamily: 'sans-serif',
+            color: '#333'
+        };
+
+        return(
+            <div style={textStyle}>
+                {this.props.display}
+            </div>
+        );
+    }
+}
+
+class PlusButton extends React.Component {
+    render(){
+        var buttonStyle = {
+            width: 30,
+            height: 30,
+            fontSize: '1em',
+            fontFamily: 'sans-serif',
+            fontWeight: 'bold',
+            lineHeight: '3px',
+            color: '#333'
+        };
+
+        return(
+            <button onClick={this.props.clickHandler} style={buttonStyle}>
+            +
+            </button>
+        )
+    }
+}
+
+class CounterParent extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            count: 0
+        };
+
+        this.increase = this.increase.bind(this);
+    }
+
+    increase(e) {
+        this.setState({
+            count: this.state.count + 1
+        });
+
+        /* shiftKey
+        var currentCount = this.state.count;
+        
+        currentCount = (e.shiftKey) ? currentCount += 10 : currentCount += 1;
+        
+        this.setState({
+            count: currentCount
+        });
+        */
+    }
+
+    render(){
+        var backgroundStyle = {
+            width: 250,
+            height: 100,
+            padding: 50,
+            borderRadius: 10,
+            backgroundColor: '#ffc53a',
+            textAlign: 'center'
+        };
+
+        return(
+            <div style={backgroundStyle}>
+                <Counter display={this.state.count} />
+                <PlusButton clickHandler={this.increase} />
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(
+    <div>
+        <CounterParent />
+    </div>,
+    document.querySelector('#container')
+);
+
+
+</script>
+
+</body>
+</html>

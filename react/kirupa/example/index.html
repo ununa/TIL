@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title></title>
+<style>
+    .lastResult, .lowOrHi {display:inline-block}
+</style>
+</head>
+<body>
+<h1>
+    <a href="index.html">WEB</a>
+</h1>
+
+<div class="form">
+    <label for="guessField">Enter a guess: </label>
+    <input type="text" id="guessField" class="guessField">
+    <input type="submit" value="Submit guess" class="guessSubmit">
+</div>
+
+<div class="resultParas">
+    <p class="guesses"></p>
+    <p class="lastResult"></p>
+    <p class="lowOrHi"></p>
+</div>
+
+
+<script>
+// 숫자 입력: 들어온 숫자가 1부터 100사이인지 체크
+// 숫자가 입력되면 해당 숫자를 저장하고, 이전 숫자를 함께 볼 수 있음
+// 숫자가 일치하느냐
+// 일치. 축하, 숫자 맞출 필요 없음, 다시 할건지 여부 묻기
+// 틀림. 틀림, 다른 숫자 입력, 차례 1증가
+// 틀림. 틀림, 더이상 숫자 입력 안됨, 다시 게임 할건지 묻기
+// 재시작. 게임의 구조와 ui는 리셋, 1부터 다시 시작.
+
+
+var randomNumber = Math.floor(Math.random() * 100) + 1;
+
+var guesses = document.querySelector('.guesses');
+var lastResult = document.querySelector('.lastResult');
+var lowOrHi = document.querySelector('.lowOrHi');
+
+var guessSubmit = document.querySelector('.guessSubmit');
+var guessField = document.querySelector('.guessField');
+
+var guessCount = 1;
+var resetButton;
+
+function checkGuess() {
+    var userGuess = Number(guessField.value);
+    if(guessCount === 1) {
+        guesses.textContent = '추측 히스토리: ';
+    }
+    guesses.textContent += userGuess + ' ';
+
+    if(userGuess === randomNumber) {
+        lastResult.textContent = '정답!';
+        lowOrHi.textContent = '';
+        setGameOver();
+    } else if (guessCount === 10) {
+        lastResult.textContent = '게임 끝!';
+        setGameOver();
+    } else {
+        lastResult.textContent = '틀렸어!';
+        if(userGuess < randomNumber) {
+            lowOrHi.textContent = '추측이 낮아';
+        }else if(userGuess > randomNumber) {
+            lowOrHi.textContent = '추측이 높아';
+        }
+    }
+
+    guessCount++;
+    guessField.value = '';
+    guessField.focus();
+}
+
+function setGameOver(){
+    guessField.disabled = true;
+    guessSubmit.disabled = true;
+    resetButton = document.createElement('button');
+    resetButton.textContent = '다시 시작';
+    document.body.appendChild(resetButton);
+    resetButton.addEventListener('click', resetGame);
+}
+
+function resetGame() {
+    guessCount = 1;
+    
+    var resetParas = document.querySelectorAll('.resetParas p');
+    for (var i = 0; i < resetParas.length; i++) {
+        resetParas[i].textContent = '';
+    }
+
+    resetButton.parentNode.removeChild(resetButton);
+
+    guessField.disabled = false;
+    guessSubmit.disabled = false;
+    guessField.value = '';
+    guessField.focus();
+    guesses.textContent = '추측 히스토리: ';
+    lastResult.textContent = '';
+    lowOrHi.textContent = '';
+
+    randomNumber = Math.floor(Math.random() * 100) + 1;
+    console.log(randomNumber)
+
+
+}
+console.log(randomNumber);
+guessSubmit.addEventListener('click', checkGuess);
+
+
+
+
+
+//console.log(document.getElementsByClassName('container').length);
+//console.log(document.querySelector('.container').length);
+//console.log(document.querySelectorAll('.container').length);
+
+
+
+
+const cat = {
+  name: '메옹',
+  age: 2
+  // key(문자열) : value
+  // key === property === 속성
+  // 객체 속성의 출력 순서는 임의적이다(arbitrary order)
+  // 브라우저 마음대로 나오니, 객체 순서의 의존해서 프로그래밍 하지 말 것.
+};
+let key = 'name';
+
+
+var arr=['a','b','c'];
+//a : 0 , b:1, c:2
+var b={};
+for(var i=0;i<arr.length;i++){
+    b[arr[i]] = i;
+}
+function foo(){
+    return [ 'a', 'b', 'c'];
+}
+console.log(foo())
+</script>
+</body>
+</html>
