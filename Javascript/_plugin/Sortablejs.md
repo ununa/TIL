@@ -32,10 +32,10 @@ var sortable = new Sortable(el, {
 #### setting
 ``` js
 var _lnbSortable = Sortable.create(lnbSortable, {
-        animation: 150,
-        disabled: true,
-        draggable:'.sortable-item:not(.is-recomm)',
-        store: { ... }
+    animation: 150,
+    disabled: true,
+    draggable:'.sortable-item:not(.is-recomm)',
+    store: { ... }
 });
 ```
 
