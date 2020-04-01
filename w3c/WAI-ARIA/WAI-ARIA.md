@@ -1,10 +1,12 @@
 # WAI-ARIA
 
 W3C에 의해 제정된 RIA(Rich Internet Applications)의 웹 접근성에 대한 표준 기술 규격을 의미함
-```
-RIA(Rich Internet Applications)란?
-정적인 HTML과 단순한 자바스크립트 환경의 웹이 아닌 동적인 자바스크립트와 Ajax와 같은 기술을 사용한 환경에서 수준 높은 UX(User eXperience)를 제공하는 웹 애플리케이션
-```
+> RIA(Rich Internet Applications)란?
+
+
+>정적인 HTML과 단순한 자바스크립트 환경의 웹이 아닌 동적인 자바스크립트와 Ajax와 같은 기술을 사용한 환경에서 수준 높은 UX(User eXperience)를 제공하는 웹 애플리케이션
+
+
 RIA는 화려하고 편리한 웹 애플리케이션이지만 스크린리더와 같은 보조기술을 사용하는 장애인들이 접근하기에 취약하다.
 - 자바스크립트, AJAX등을 활용하여 의미를 가지지 않는 요소(div, span)로 특정 컴포넌트를 구현할 때 스크린리더 등 보조기기에서 해당 컴포넌트의 기능을 명확하게 파악하기 어려움.
 - 주식 시세나 RSS Feed 등 시간에 따라 정보가 자동으로 업데이트 되는 경우 스크린리더 등 보조기기에서 업데이트 된 정보를 파악하기 어려움
