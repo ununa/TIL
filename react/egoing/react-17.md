@@ -20,7 +20,6 @@ return (
   </div>
 );
 ```
-#### tip! debugger*
 
 ### 이벤트에서 state 변경하기
 - ```bind```
@@ -43,9 +42,6 @@ bindTest2();
 - 변경하고 싶은 값을 객체의 형태로 주어야한다.
 - state의 값이 바뀌면 setState로 바꿔야한다.
 
-### 컴포넌트 이벤트 만들기 1
-- onChangePage: 이벤트에 설치한 함수를 호출하도록 만드려고 하는 것
-- <Subject/>라고 하는 컴포넌트에 onChagePage라는 이벤트를 만들었고, 그 이벤트에 함수를 설치해주면 이벤트가 발생되었을 때 props로 전달된 onChangePage 함수를 호출하면 된다.
 
 
 
