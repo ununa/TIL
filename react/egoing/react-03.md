@@ -66,6 +66,7 @@ class App extends Component {
 - ```props```는 자식 컴포넌트로 값을 보내준다.
 - ```props```는 객체 형태로 자식 컴포넌트에게 넘어가며, 자식 컴포넌트에서는 파라미터로 ```props```를 받고, 객체의 요소를 사용하는 것과 동일하게 ```props``` 값들을 사용할 수 있다.
 - ```ES6```에서 지원하는 구조분해 문법도 알아보자.
+https://velog.io/@moojin/%EB%85%B8%EB%A7%88%EB%93%9C-%EC%BD%94%EB%8D%94-React-Fundamentals-%ED%95%84%EA%B8%B0-002
 
 
 ### State
