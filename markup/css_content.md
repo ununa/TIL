@@ -53,10 +53,11 @@
     color:#333
 }
 .break-type[data-tooltip-text]:hover:after {
-    content:"My Heart leaps up when I behold A rainbow in the sky: So was it when my life began; So be it now I am a man So be it when I shall grow old, Or let me die! The Child is father of the Man; And I could wish my days to be Bound each to by natural piety.";
+    content:"My Heart \A leaps up when I behold A rainbow in the sky: So was it when my life began; So be it now I am a man So be it when I shall grow old, Or let me die! The Child is father of the Man; And I could wish my days to be Bound each to by natural piety.";
     white-space:pre;
 }
 ```
+```\A```: content 내에서 쓸 수 있는 줄바꿈
 
 #### 참고링크:
 https://developer.mozilla.org/ko/docs/Web/CSS/content
