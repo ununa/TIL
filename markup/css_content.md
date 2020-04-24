@@ -23,41 +23,41 @@
 }
 
 [data-tooltip-text]:hover:after {
+    z-index: 9999;
+	position: absolute;
+	
+    top: -9px;
+    left: calc(100% + 5px);    
+	width: auto;
+    padding: 7px 12px;
+    margin-bottom: 10px;
+	
     border:1px solid #d9d9d9;
-	background-color: #fff;
+    background-color: #fff;
     background-color: rgba(255, 255, 255, 1);
     
-	-webkit-box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.2);
-	-moz-box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.2);
-	box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.2);
-
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
+    -webkit-box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
 	border-radius: 3px;
 
-	color: #333;
+    text-align:left;
+    line-height:1.4;
+    color: #333;
     font-size: 12px;
     font-weight: 500;
 	content: attr(data-tooltip-text);
-
-    margin-bottom: 10px;
-	top: -9px;
-	left: calc(100% + 5px);    
-	padding: 7px 12px;
-	position: absolute;
-	width: auto;
-
-    z-index: 9999;
-    text-align:left;
-    line-height:1.4;
-    color:#333
 }
 .break-type[data-tooltip-text]:hover:after {
-    content:"My Heart \A leaps up when I behold A rainbow in the sky: So was it when my life began; So be it now I am a man So be it when I shall grow old, Or let me die! The Child is father of the Man; And I could wish my days to be Bound each to by natural piety.";
+    content:"텍스트 \A 텍스트";
     white-space:pre;
 }
 ```
-```\A```: content 내에서 쓸 수 있는 줄바꿈
+```\A```: content 내에서 쓸 수 있는 줄바꿈. 적용하려면 ```content:``` 속성에 바로 입력해야한다.  
+```content: attr(data-tooltip-text)``` 적용되지않음.
+
 
 #### 참고링크:
 https://developer.mozilla.org/ko/docs/Web/CSS/content
